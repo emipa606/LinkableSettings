@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <LiSe.settings>Settings</LiSe.settings>
+  <LiSe.resetall.label>Manual config reset</LiSe.resetall.label>
+  <LiSe.resetall.tooltip>Reset all custom settings</LiSe.resetall.tooltip>
+  <LiSe.resetall.button>Reset all</LiSe.resetall.button>
+  <LiSe.reset.button>Reset</LiSe.reset.button>
+  <LiSe.resetall.confirm>All custom settings will be removed and replaced with the vanilla settings</LiSe.resetall.confirm>
+  <LiSe.logging.label>Enable verbose logging</LiSe.logging.label>
+  <LiSe.logging.tooltip>Shows verbose logging, for finding errors</LiSe.logging.tooltip>
+  <LiSe.version.label>Installed mod-version: {0}</LiSe.version.label>
+  <LiSe.error.thing>Error, could not find {0} in the database</LiSe.error.thing>
+  <LiSe.linktype.label>Linktype</LiSe.linktype.label>
+  <LiSe.linktype.description>The type of link the facility should use</LiSe.linktype.description>
+  <LiSe.linkrange.label>Range: {0}</LiSe.linkrange.label>
+  <LiSe.linkrange.description>The range to be used when selecting range or room above</LiSe.linkrange.description>
+  <LiSe.linkamount.label>Amount: {0}</LiSe.linkamount.label>
+  <LiSe.linkamount.description>The amount that can be linked to the same building</LiSe.linkamount.description>
+  <LiSe.range.label>In range</LiSe.range.label>
+  <LiSe.range.description>Active when in range defined below</LiSe.range.description>
+  <LiSe.room.label>In same room</LiSe.room.label>
+  <LiSe.room.description>Active when in the same room. If outside it will use the range defined below</LiSe.room.description>
+  <LiSe.mustBePlacedAdjacent.label>Adjacent</LiSe.mustBePlacedAdjacent.label>
+  <LiSe.mustBePlacedAdjacent.description>Active when placed adjacent to the building</LiSe.mustBePlacedAdjacent.description>
+  <LiSe.mustBePlacedAdjacentCardinalToBedHead.label>Head of bed</LiSe.mustBePlacedAdjacentCardinalToBedHead.label>
+  <LiSe.mustBePlacedAdjacentCardinalToBedHead.description>Active when placed adjacent to the head of a bed</LiSe.mustBePlacedAdjacentCardinalToBedHead.description>
+  <LiSe.mustBePlacedAdjacentCardinalToAndFacingBedHead.label>Facing head of bed</LiSe.mustBePlacedAdjacentCardinalToAndFacingBedHead.label>
+  <LiSe.mustBePlacedAdjacentCardinalToAndFacingBedHead.description>Active when placed adjacent to the head of a bed and also facing the head of the bed</LiSe.mustBePlacedAdjacentCardinalToAndFacingBedHead.description>
+</LanguageData>
