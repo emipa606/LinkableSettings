@@ -5,6 +5,7 @@
   <LiSe.resetall.tooltip>Reset all custom settings</LiSe.resetall.tooltip>
   <LiSe.resetall.button>Reset all</LiSe.resetall.button>
   <LiSe.reset.button>Reset</LiSe.reset.button>
+  <LiSe.search>Search</LiSe.search>
   <LiSe.resetall.confirm>All custom settings will be removed and replaced with the vanilla settings</LiSe.resetall.confirm>
   <LiSe.logging.label>Enable verbose logging</LiSe.logging.label>
   <LiSe.logging.tooltip>Shows verbose logging, for finding errors</LiSe.logging.tooltip>

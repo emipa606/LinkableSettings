@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace LinkableSettings;
@@ -21,6 +22,8 @@ public static class Main
 
     public static readonly Dictionary<string, int> VanillaFacilityAmount =
         new Dictionary<string, int>();
+
+    public static Texture2D Search = ContentFinder<Texture2D>.Get("Icons/magnify");
 
     static Main()
     {

@@ -20,6 +20,8 @@ If outside it will use the range defined instead.
 
 Safe to add and remove from save.
 
+Idea by: LEGION
+
 ![Image](https://i.imgur.com/O0IIlYj.png)
 
 Since modding is just a hobby for me I expect no donations to keep modding. If you still want to show your support you can gift me anything from my https://store.steampowered.com/wishlist/id/Mlie]Wishlist or buy me a cup of tea.

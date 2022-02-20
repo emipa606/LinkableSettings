@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Mlie;
 using RimWorld;
 using UnityEngine;
@@ -31,6 +32,8 @@ internal class LinkableSettingsMod : Mod
     private static Vector2 tabsScrollPosition;
 
     private static string currentVersion;
+    private static readonly Vector2 searchSize = new Vector2(280f, 24f);
+    private static string searchText = "";
 
 
     /// <summary>
@@ -377,12 +380,30 @@ internal class LinkableSettingsMod : Mod
         var tabFrameRect = innerContainer.ContractedBy(5);
         tabFrameRect.y += 15;
         tabFrameRect.height -= 15;
+
+        searchText =
+            Widgets.TextField(
+                new Rect(
+                    scrollContainer.position + new Vector2(5, 46),
+                    searchSize),
+                searchText);
+        TooltipHandler.TipRegion(new Rect(
+            scrollContainer.position + new Vector2(5, 46),
+            searchSize), "LiSe.search".Translate());
+        GUI.DrawTexture(new Rect(scrollContainer.position + new Vector2(5 + searchSize.x, 46), iconSize), Main.Search);
         var tabContentRect = tabFrameRect;
         tabContentRect.x = 0;
         tabContentRect.y = 0;
         tabContentRect.width -= 20;
-        var allFacilities = Main.AllFacilities;
-        var listAddition = 24;
+        var allFacilities = Main.AllFacilities.OrderBy(def => def.label).ToList();
+        if (!string.IsNullOrEmpty(searchText))
+        {
+            allFacilities = allFacilities.Where(def =>
+                def.label.ToLower().Contains(searchText.ToLower()) ||
+                def.modContentPack?.Name.ToLower().Contains(searchText.ToLower()) == true).ToList();
+        }
+
+        var listAddition = 50;
 
         tabContentRect.height = (allFacilities.Count * 25f) + listAddition;
         Widgets.BeginScrollView(tabFrameRect, ref tabsScrollPosition, tabContentRect);
@@ -392,6 +413,7 @@ internal class LinkableSettingsMod : Mod
         {
             SelectedDef = SelectedDef == "Settings" ? null : "Settings";
         }
+
 
         listing_Standard.ListItemSelectable(null, Color.yellow, out _);
         foreach (var thingDef in allFacilities)
