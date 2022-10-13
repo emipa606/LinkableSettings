@@ -23,7 +23,7 @@ public static class Main
     public static readonly Dictionary<string, int> VanillaFacilityAmount =
         new Dictionary<string, int>();
 
-    public static Texture2D Search = ContentFinder<Texture2D>.Get("Icons/magnify");
+    public static readonly Texture2D Search = ContentFinder<Texture2D>.Get("Icons/magnify");
 
     static Main()
     {
@@ -131,12 +131,8 @@ public static class Main
     public static void ResetToVanilla(string defName)
     {
         var facility = DefDatabase<ThingDef>.GetNamedSilentFail(defName);
-        if (facility == null)
-        {
-            return;
-        }
 
-        var facilityComp = facility.GetCompProperties<CompProperties_Facility>();
+        var facilityComp = facility?.GetCompProperties<CompProperties_Facility>();
         if (facilityComp == null)
         {
             return;
