@@ -21,6 +21,8 @@
   <LiSe.range.description>Active when in range defined below</LiSe.range.description>
   <LiSe.room.label>In same room</LiSe.room.label>
   <LiSe.room.description>Active when in the same room. If outside it will use the range defined below</LiSe.room.description>
+  <LiSe.ignorewalls.label>Link through walls</LiSe.ignorewalls.label>
+  <LiSe.ignorewalls.description>Will link when within range regardless of what is in between</LiSe.ignorewalls.description>
   <LiSe.mustBePlacedAdjacent.label>Adjacent</LiSe.mustBePlacedAdjacent.label>
   <LiSe.mustBePlacedAdjacent.description>Active when placed adjacent to the building</LiSe.mustBePlacedAdjacent.description>
   <LiSe.mustBePlacedAdjacentCardinalToBedHead.label>Head of bed</LiSe.mustBePlacedAdjacentCardinalToBedHead.label>

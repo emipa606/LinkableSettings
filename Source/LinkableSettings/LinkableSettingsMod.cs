@@ -39,7 +39,7 @@ internal class LinkableSettingsMod : Mod
     /// <summary>
     ///     The private settings
     /// </summary>
-    private LinkableSettingsModSettings settings;
+    public readonly LinkableSettingsModSettings Settings;
 
 
     /// <summary>
@@ -50,31 +50,11 @@ internal class LinkableSettingsMod : Mod
         : base(content)
     {
         instance = this;
-        currentVersion =
-            VersionFromManifest.GetVersionFromModMetaData(
-                ModLister.GetActiveModWithIdentifier("Mlie.LinkableSettings"));
+        currentVersion = VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
+        Settings = GetSettings<LinkableSettingsModSettings>();
     }
 
     private static string SelectedDef { get; set; } = "Settings";
-
-    /// <summary>
-    ///     The instance-settings for the mod
-    /// </summary>
-    internal LinkableSettingsModSettings Settings
-    {
-        get
-        {
-            if (settings == null)
-            {
-                settings = GetSettings<LinkableSettingsModSettings>();
-            }
-
-            return settings;
-        }
-
-        set => settings = value;
-    }
-
 
     /// <summary>
     ///     The settings-window
@@ -261,8 +241,8 @@ internal class LinkableSettingsMod : Mod
                 DrawIcon(currentDef, iconRect);
 
                 listing_Standard.GapLine();
-                var linkType = instance.Settings.FacilityType.ContainsKey(currentDef.defName)
-                    ? instance.Settings.FacilityType[currentDef.defName]
+                var linkType = instance.Settings.FacilityType.TryGetValue(currentDef.defName, out var value)
+                    ? value
                     : Main.VanillaFacilityType[currentDef.defName];
 
                 Text.Font = GameFont.Medium;
@@ -272,53 +252,51 @@ internal class LinkableSettingsMod : Mod
 
                 if (Main.HaveAnySavedSettings(currentDef.defName))
                 {
-                    DrawButton(() => { Main.ResetToVanilla(currentDef.defName); }, "LiSe.reset.button".Translate(),
+                    DrawButton(() =>
+                        {
+                            Main.ResetToVanilla(currentDef.defName);
+                            linkType = Main.VanillaFacilityType[currentDef.defName];
+                        }, "LiSe.reset.button".Translate(),
                         new Vector2(labelPoint.position.x + frameRect.width - buttonSize.x, labelPoint.position.y));
                 }
 
-                if (listing_Standard.RadioButton("LiSe.range.label".Translate(), linkType == 0, 0f,
+                if (listing_Standard.RadioButton("LiSe.range.label".Translate(), linkType is 0 or 5, 0f,
                         "LiSe.range.description".Translate()))
                 {
-                    instance.Settings.FacilityType[currentDef.defName] = 0;
+                    linkType = 0;
                 }
 
                 if (listing_Standard.RadioButton("LiSe.room.label".Translate(), linkType == 4, 0f,
                         "LiSe.room.description".Translate()))
                 {
-                    instance.Settings.FacilityType[currentDef.defName] = 4;
+                    linkType = 4;
                 }
 
                 if (listing_Standard.RadioButton("LiSe.mustBePlacedAdjacent.label".Translate(), linkType == 1, 0f,
                         "LiSe.mustBePlacedAdjacent.description".Translate()))
                 {
-                    instance.Settings.FacilityType[currentDef.defName] = 1;
+                    linkType = 1;
                 }
 
                 if (listing_Standard.RadioButton("LiSe.mustBePlacedAdjacentCardinalToBedHead.label".Translate(),
                         linkType == 2, 0f,
                         "LiSe.mustBePlacedAdjacentCardinalToBedHead.description".Translate()))
                 {
-                    instance.Settings.FacilityType[currentDef.defName] = 2;
+                    linkType = 2;
                 }
 
                 if (listing_Standard.RadioButton(
                         "LiSe.mustBePlacedAdjacentCardinalToAndFacingBedHead.label".Translate(), linkType == 3, 0f,
                         "LiSe.mustBePlacedAdjacentCardinalToAndFacingBedHead.description".Translate()))
                 {
-                    instance.Settings.FacilityType[currentDef.defName] = 3;
-                }
-
-                if (instance.Settings.FacilityType.ContainsKey(currentDef.defName) &&
-                    instance.Settings.FacilityType[currentDef.defName] == Main.VanillaFacilityType[currentDef.defName])
-                {
-                    instance.Settings.FacilityType.Remove(currentDef.defName);
+                    linkType = 3;
                 }
 
                 listing_Standard.Gap();
-                if (linkType is 0 or 4)
+                if (linkType is 0 or 4 or 5)
                 {
-                    var linkRange = instance.Settings.FacilityRange.ContainsKey(currentDef.defName)
-                        ? instance.Settings.FacilityRange[currentDef.defName]
+                    var linkRange = instance.Settings.FacilityRange.TryGetValue(currentDef.defName, out var value1)
+                        ? value1
                         : Main.VanillaFacilityRange[currentDef.defName];
 
                     var currentRange = linkRange;
@@ -339,11 +317,32 @@ internal class LinkableSettingsMod : Mod
                         instance.Settings.FacilityRange.Remove(currentDef.defName);
                     }
 
+                    if (linkType is 0 or 5)
+                    {
+                        var ignorewalls = linkType == 5;
+                        listing_Standard.CheckboxLabeled("LiSe.ignorewalls.label".Translate(), ref ignorewalls,
+                            "LiSe.ignorewalls.description".Translate());
+                        linkType = ignorewalls ? 5 : 0;
+                    }
+
                     listing_Standard.Gap();
                 }
 
-                var linkAmount = instance.Settings.FacilityAmount.ContainsKey(currentDef.defName)
-                    ? instance.Settings.FacilityAmount[currentDef.defName]
+
+                if (linkType == Main.VanillaFacilityType[currentDef.defName])
+                {
+                    if (instance.Settings.FacilityType.ContainsKey(currentDef.defName))
+                    {
+                        instance.Settings.FacilityType.Remove(currentDef.defName);
+                    }
+                }
+                else
+                {
+                    instance.Settings.FacilityType[currentDef.defName] = linkType;
+                }
+
+                var linkAmount = instance.Settings.FacilityAmount.TryGetValue(currentDef.defName, out var value2)
+                    ? value2
                     : Main.VanillaFacilityAmount[currentDef.defName];
                 var currentAmount = linkAmount;
 

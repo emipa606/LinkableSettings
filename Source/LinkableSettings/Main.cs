@@ -70,14 +70,14 @@ public static class Main
                     LinkableSettingsMod.instance.Settings.FacilityType[facility.defName] == 3;
             }
 
-            if (LinkableSettingsMod.instance.Settings.FacilityRange.ContainsKey(facility.defName))
+            if (LinkableSettingsMod.instance.Settings.FacilityRange.TryGetValue(facility.defName, out var value))
             {
-                facilityComp.maxDistance = LinkableSettingsMod.instance.Settings.FacilityRange[facility.defName];
+                facilityComp.maxDistance = value;
             }
 
-            if (LinkableSettingsMod.instance.Settings.FacilityAmount.ContainsKey(facility.defName))
+            if (LinkableSettingsMod.instance.Settings.FacilityAmount.TryGetValue(facility.defName, out var value1))
             {
-                facilityComp.maxSimultaneous = LinkableSettingsMod.instance.Settings.FacilityAmount[facility.defName];
+                facilityComp.maxSimultaneous = value1;
             }
         }
     }

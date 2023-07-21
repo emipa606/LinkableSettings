@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace LinkableSettings;
@@ -8,11 +9,11 @@ namespace LinkableSettings;
     typeof(Rot4), typeof(ThingDef), typeof(IntVec3), typeof(Rot4))]
 public static class CompAffectedByFacilities_CanPotentiallyLinkTo_Static
 {
-    public static bool Prefix(ThingDef facilityDef, IntVec3 facilityPos, ThingDef myDef, IntVec3 myPos,
-        ref bool __result)
+    public static bool Prefix(ThingDef facilityDef, IntVec3 facilityPos, Rot4 facilityRot, ThingDef myDef,
+        IntVec3 myPos, Rot4 myRot, ref bool __result)
     {
-        if (!LinkableSettingsMod.instance.Settings.FacilityType.ContainsKey(facilityDef.defName) ||
-            LinkableSettingsMod.instance.Settings.FacilityType[facilityDef.defName] != 4)
+        if (!LinkableSettingsMod.instance.Settings.FacilityType.TryGetValue(facilityDef.defName, out var linkType) ||
+            linkType < 4)
         {
             return true;
         }
@@ -23,21 +24,24 @@ public static class CompAffectedByFacilities_CanPotentiallyLinkTo_Static
             return true;
         }
 
-        try
+        if (linkType == 4)
         {
-            var facilityRoom = facilityPos.GetRoom(currentMap);
-            if (facilityRoom.PsychologicallyOutdoors)
+            try
             {
-                return true;
+                __result = facilityPos.GetRoom(currentMap) == myPos.GetRoom(currentMap);
+            }
+            catch
+            {
+                // ignored. Not very nice but there are a lot of things that could go wrong here
             }
 
-            __result = facilityRoom == myPos.GetRoom(currentMap);
+            return false;
         }
-        catch
-        {
-            // ignored. Not very nice but there are a lot of things that could go wrong here
-            return true;
-        }
+
+        var compProperties = facilityDef.GetCompProperties<CompProperties_Facility>();
+        var myCenter = GenThing.TrueCenter(myPos, myRot, myDef.size, myDef.Altitude);
+        var facilityCenter = GenThing.TrueCenter(facilityPos, facilityRot, facilityDef.size, facilityDef.Altitude);
+        __result = Vector3.Distance(myCenter, facilityCenter) <= compProperties.maxDistance;
 
         return false;
     }

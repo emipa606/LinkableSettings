@@ -1,5 +1,9 @@
 # Changelog for LinkableSettings
 
+1.4.2 - Added option for linking through walls, fixed the same room-option.
+Used DeepL to update translations for ChineseSimplified, French, German
+
+
 1.4.1 - Mod updated for 1.4 and passed autotests
 
 
