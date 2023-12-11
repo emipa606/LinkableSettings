@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<HugsLib.UpdateFeatureDef Abstract="true" Name="LinkableSettings_UpdateFeatureBase">
-		<modNameReadable>LinkableSettings</modNameReadable>
-		<linkUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2739581441</linkUrl>
-	</HugsLib.UpdateFeatureDef>
-	<HugsLib.UpdateFeatureDef ParentName="LinkableSettings_UpdateFeatureBase">
-		<defName>LinkableSettings_1_4_2</defName>
-		<assemblyVersion>1.4.2</assemblyVersion>
-		<content>There is now an option for linking through walls when selecting the range-setting
+  <HugsLib.UpdateFeatureDef Abstract="true" Name="LinkableSettings_UpdateFeatureBase">
+    <modNameReadable>LinkableSettings</modNameReadable>
+    <linkUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2739581441</linkUrl>
+  </HugsLib.UpdateFeatureDef>
+  <HugsLib.UpdateFeatureDef ParentName="LinkableSettings_UpdateFeatureBase">
+    <defName>LinkableSettings_1_4_2</defName>
+    <assemblyVersion>1.4.2</assemblyVersion>
+    <content>There is now an option for linking through walls when selecting the range-setting
 The option to link in the same room should now also work when the link has no line of sight between the buildings.</content>
-	</HugsLib.UpdateFeatureDef>
+  </HugsLib.UpdateFeatureDef>
 </Defs>
-

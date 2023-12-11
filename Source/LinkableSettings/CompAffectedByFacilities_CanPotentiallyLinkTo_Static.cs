@@ -28,7 +28,8 @@ public static class CompAffectedByFacilities_CanPotentiallyLinkTo_Static
         {
             try
             {
-                __result = facilityPos.GetRoom(currentMap) == myPos.GetRoom(currentMap);
+                __result = currentMap.regionAndRoomUpdater.Enabled &&
+                           facilityPos.GetRoom(currentMap) == myPos.GetRoom(currentMap);
             }
             catch
             {

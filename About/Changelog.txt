@@ -1,5 +1,8 @@
 # Changelog for LinkableSettings
 
+1.4.3 - Fixed the warning-spam when loading games with room-setting active on a linkable
+
+
 1.4.2 - Added option for linking through walls, fixed the same room-option.
 Used DeepL to update translations for ChineseSimplified, French, German
 

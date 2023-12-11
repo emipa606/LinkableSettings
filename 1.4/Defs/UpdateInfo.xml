@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<TabulaRasa.UpdateDef Abstract="true" Name="LinkableSettings_UpdateInfoBase">
-		<linkUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2739581441</linkUrl>
-		<banner>UpdateInfo/LinkableSettings</banner>
-	</TabulaRasa.UpdateDef>
-	<TabulaRasa.UpdateDef ParentName="LinkableSettings_UpdateInfoBase">
-		<defName>LinkableSettings_1_4_2</defName>
-		<date>2023/7/21</date>
-		<content>There is now an option for linking through walls when selecting the range-setting
+  <TabulaRasa.UpdateDef Abstract="true" Name="LinkableSettings_UpdateInfoBase">
+    <linkUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2739581441</linkUrl>
+    <banner>UpdateInfo/LinkableSettings</banner>
+  </TabulaRasa.UpdateDef>
+  <TabulaRasa.UpdateDef ParentName="LinkableSettings_UpdateInfoBase">
+    <defName>LinkableSettings_1_4_2</defName>
+    <date>2023/7/21</date>
+    <content>There is now an option for linking through walls when selecting the range-setting
 The option to link in the same room should now also work when the link has no line of sight between the buildings.</content>
-	</TabulaRasa.UpdateDef>
+  </TabulaRasa.UpdateDef>
 </Defs>
-
