@@ -6,7 +6,7 @@ using Verse;
 namespace LinkableSettings;
 
 [HarmonyPatch(typeof(CompAffectedByFacilities), "CanPotentiallyLinkTo_Static", typeof(ThingDef), typeof(IntVec3),
-    typeof(Rot4), typeof(ThingDef), typeof(IntVec3), typeof(Rot4))]
+    typeof(Rot4), typeof(ThingDef), typeof(IntVec3), typeof(Rot4), typeof(Map))]
 public static class CompAffectedByFacilities_CanPotentiallyLinkTo_Static
 {
     public static bool Prefix(ThingDef facilityDef, IntVec3 facilityPos, Rot4 facilityRot, ThingDef myDef,

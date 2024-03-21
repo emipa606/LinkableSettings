@@ -138,12 +138,12 @@ public static class Main
             return;
         }
 
-        if (!VanillaFacilityType.ContainsKey(facility.defName))
+        if (!VanillaFacilityType.TryGetValue(facility.defName, out var value))
         {
             return;
         }
 
-        facilityComp.mustBePlacedAdjacent = VanillaFacilityType[facility.defName] == 1;
+        facilityComp.mustBePlacedAdjacent = value == 1;
         facilityComp.mustBePlacedAdjacentCardinalToBedHead = VanillaFacilityType[facility.defName] == 2;
         facilityComp.mustBePlacedAdjacentCardinalToAndFacingBedHead = VanillaFacilityType[facility.defName] == 3;
         facilityComp.maxDistance = VanillaFacilityRange[facility.defName];
@@ -163,12 +163,12 @@ public static class Main
                 continue;
             }
 
-            if (!VanillaFacilityType.ContainsKey(facility.defName))
+            if (!VanillaFacilityType.TryGetValue(facility.defName, out var value))
             {
                 continue;
             }
 
-            facilityComp.mustBePlacedAdjacent = VanillaFacilityType[facility.defName] == 1;
+            facilityComp.mustBePlacedAdjacent = value == 1;
             facilityComp.mustBePlacedAdjacentCardinalToBedHead = VanillaFacilityType[facility.defName] == 2;
             facilityComp.mustBePlacedAdjacentCardinalToAndFacingBedHead = VanillaFacilityType[facility.defName] == 3;
             facilityComp.maxDistance = VanillaFacilityRange[facility.defName];

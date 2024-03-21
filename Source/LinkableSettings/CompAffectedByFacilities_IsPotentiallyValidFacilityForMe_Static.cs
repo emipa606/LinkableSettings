@@ -9,8 +9,7 @@ namespace LinkableSettings;
     typeof(Rot4), typeof(ThingDef), typeof(IntVec3), typeof(Rot4), typeof(Map))]
 public static class CompAffectedByFacilities_IsPotentiallyValidFacilityForMe_Static
 {
-    public static bool Prefix(ThingDef facilityDef, IntVec3 facilityPos, Rot4 facilityRot, ThingDef myDef,
-        IntVec3 myPos, Rot4 myRot, Map map, ref bool __result)
+    public static bool Prefix(ThingDef facilityDef, IntVec3 facilityPos, IntVec3 myPos, Map map, ref bool __result)
     {
         if (!LinkableSettingsMod.instance.Settings.FacilityType.TryGetValue(facilityDef.defName, out var linkType) ||
             linkType < 4)

@@ -1,5 +1,8 @@
 # Changelog for LinkableSettings
 
+1.5.0 - Mod updated for 1.5 and passed autotests
+
+
 1.4.3 - Fixed the warning-spam when loading games with room-setting active on a linkable
 
 
