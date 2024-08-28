@@ -30,7 +30,8 @@ public static class Main
         var harmony = new Harmony("Mlie.LinkableSettings");
         harmony.PatchAll(Assembly.GetExecutingAssembly());
         AllFacilities = DefDatabase<ThingDef>.AllDefsListForReading
-            .Where(def => def.HasComp(typeof(CompFacility))).ToList();
+            .Where(def => def.HasComp<CompFacility>() || def.HasComp<CompFacilityInactiveWhenElectricityDisabled>() ||
+                          def.HasComp<CompFacilityQualityBased>()).ToList();
         if (LinkableSettingsMod.instance.Settings.FacilityType == null)
         {
             LinkableSettingsMod.instance.Settings.FacilityType = new Dictionary<string, int>();

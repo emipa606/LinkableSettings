@@ -1,5 +1,8 @@
 # Changelog for LinkableSettings
 
+1.5.1 - Should now work with the new types of facilities
+
+
 1.5.0 - Mod updated for 1.5 and passed autotests
 
 
