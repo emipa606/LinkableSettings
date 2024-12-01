@@ -24,25 +24,26 @@ public static class CompAffectedByFacilities_CanPotentiallyLinkTo_Static
             return true;
         }
 
-        if (linkType == 4)
-        {
-            try
-            {
-                __result = currentMap.regionAndRoomUpdater.Enabled &&
-                           facilityPos.GetRoom(currentMap) == myPos.GetRoom(currentMap);
-            }
-            catch
-            {
-                // ignored. Not very nice but there are a lot of things that could go wrong here
-            }
-
-            return false;
-        }
-
         var compProperties = facilityDef.GetCompProperties<CompProperties_Facility>();
         var myCenter = GenThing.TrueCenter(myPos, myRot, myDef.size, myDef.Altitude);
         var facilityCenter = GenThing.TrueCenter(facilityPos, facilityRot, facilityDef.size, facilityDef.Altitude);
+
         __result = Vector3.Distance(myCenter, facilityCenter) <= compProperties.maxDistance;
+
+        if (linkType != 4 || !__result)
+        {
+            return false;
+        }
+
+        try
+        {
+            __result = currentMap.regionAndRoomUpdater.Enabled &&
+                       facilityPos.GetRoom(currentMap) == myPos.GetRoom(currentMap);
+        }
+        catch
+        {
+            // ignored. Not very nice but there are a lot of things that could go wrong here
+        }
 
         return false;
     }
