@@ -70,16 +70,23 @@ public static class Main
                 facilityComp.mustBePlacedAdjacentCardinalToAndFacingBedHead =
                     LinkableSettingsMod.instance.Settings.FacilityType[facility.defName] == 3;
             }
-
-            if (LinkableSettingsMod.instance.Settings.FacilityRange.TryGetValue(facility.defName, out var value))
+            else
             {
-                facilityComp.maxDistance = value;
+                facilityComp.mustBePlacedAdjacent = VanillaFacilityType[facility.defName] == 1;
+                facilityComp.mustBePlacedAdjacentCardinalToBedHead = VanillaFacilityType[facility.defName] == 2;
+                facilityComp.mustBePlacedAdjacentCardinalToAndFacingBedHead =
+                    VanillaFacilityType[facility.defName] == 3;
             }
 
-            if (LinkableSettingsMod.instance.Settings.FacilityAmount.TryGetValue(facility.defName, out var value1))
-            {
-                facilityComp.maxSimultaneous = value1;
-            }
+            facilityComp.maxDistance =
+                LinkableSettingsMod.instance.Settings.FacilityRange.TryGetValue(facility.defName, out var value)
+                    ? value
+                    : VanillaFacilityRange[facility.defName];
+
+            facilityComp.maxSimultaneous =
+                LinkableSettingsMod.instance.Settings.FacilityAmount.TryGetValue(facility.defName, out var value1)
+                    ? value1
+                    : VanillaFacilityAmount[facility.defName];
         }
     }
 
