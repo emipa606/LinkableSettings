@@ -1,5 +1,8 @@
 # Changelog for LinkableSettings
 
+1.5.4 - Made it possible to set the max simultanious connected buidings to infinite (or max int value at least)
+
+
 1.5.3 - Fixed issue when setting a vanilla value on a facility would have no effect
 
 

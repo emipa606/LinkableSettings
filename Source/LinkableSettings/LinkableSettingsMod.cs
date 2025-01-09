@@ -345,11 +345,11 @@ internal class LinkableSettingsMod : Mod
                     ? value2
                     : Main.VanillaFacilityAmount[currentDef.defName];
                 var currentAmount = linkAmount;
-
-                listing_Standard.Label("LiSe.linkamount.label".Translate(linkAmount), -1f,
+                var linkAmountString = linkAmount > 25 ? "∞" : linkAmount.ToString();
+                listing_Standard.Label("LiSe.linkamount.label".Translate(linkAmountString), -1f,
                     "LiSe.linkamount.description".Translate());
 
-                linkAmount = (int)Math.Round(listing_Standard.Slider(linkAmount, 1f, 25f));
+                linkAmount = (int)Math.Round(listing_Standard.Slider(linkAmount, 1f, 26f));
 
                 if (linkAmount != currentAmount)
                 {

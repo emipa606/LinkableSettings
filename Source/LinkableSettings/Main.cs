@@ -79,13 +79,13 @@ public static class Main
             }
 
             facilityComp.maxDistance =
-                LinkableSettingsMod.instance.Settings.FacilityRange.TryGetValue(facility.defName, out var value)
-                    ? value
+                LinkableSettingsMod.instance.Settings.FacilityRange.TryGetValue(facility.defName, out var distance)
+                    ? distance
                     : VanillaFacilityRange[facility.defName];
 
             facilityComp.maxSimultaneous =
-                LinkableSettingsMod.instance.Settings.FacilityAmount.TryGetValue(facility.defName, out var value1)
-                    ? value1
+                LinkableSettingsMod.instance.Settings.FacilityAmount.TryGetValue(facility.defName, out var amount)
+                    ? amount > 25 ? int.MaxValue : amount
                     : VanillaFacilityAmount[facility.defName];
         }
     }
