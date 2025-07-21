@@ -1,5 +1,8 @@
 # Changelog for LinkableSettings
 
+1.6.0 - Mod updated for 1.6 and passed autotests
+
+
 1.5.4 - Made it possible to set the max simultanious connected buidings to infinite (or max int value at least)
 
 

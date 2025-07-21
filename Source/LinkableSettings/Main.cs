@@ -13,15 +13,11 @@ public static class Main
 {
     public static readonly List<ThingDef> AllFacilities;
 
+    public static readonly Dictionary<string, float> VanillaFacilityRange = new();
 
-    public static readonly Dictionary<string, float> VanillaFacilityRange =
-        new Dictionary<string, float>();
+    public static readonly Dictionary<string, int> VanillaFacilityType = new();
 
-    public static readonly Dictionary<string, int> VanillaFacilityType =
-        new Dictionary<string, int>();
-
-    public static readonly Dictionary<string, int> VanillaFacilityAmount =
-        new Dictionary<string, int>();
+    public static readonly Dictionary<string, int> VanillaFacilityAmount = new();
 
     public static readonly Texture2D Search = ContentFinder<Texture2D>.Get("Icons/magnify");
 
@@ -32,22 +28,13 @@ public static class Main
         AllFacilities = DefDatabase<ThingDef>.AllDefsListForReading
             .Where(def => def.HasComp<CompFacility>() || def.HasComp<CompFacilityInactiveWhenElectricityDisabled>() ||
                           def.HasComp<CompFacilityQualityBased>()).ToList();
-        if (LinkableSettingsMod.instance.Settings.FacilityType == null)
-        {
-            LinkableSettingsMod.instance.Settings.FacilityType = new Dictionary<string, int>();
-        }
+        LinkableSettingsMod.Instance.Settings.FacilityType ??= new Dictionary<string, int>();
 
-        if (LinkableSettingsMod.instance.Settings.FacilityRange == null)
-        {
-            LinkableSettingsMod.instance.Settings.FacilityRange = new Dictionary<string, float>();
-        }
+        LinkableSettingsMod.Instance.Settings.FacilityRange ??= new Dictionary<string, float>();
 
-        if (LinkableSettingsMod.instance.Settings.FacilityAmount == null)
-        {
-            LinkableSettingsMod.instance.Settings.FacilityAmount = new Dictionary<string, int>();
-        }
+        LinkableSettingsMod.Instance.Settings.FacilityAmount ??= new Dictionary<string, int>();
 
-        SaveVanilla();
+        saveVanilla();
         UpdateFacilities();
     }
 
@@ -61,14 +48,14 @@ public static class Main
                 continue;
             }
 
-            if (LinkableSettingsMod.instance.Settings.FacilityType.ContainsKey(facility.defName))
+            if (LinkableSettingsMod.Instance.Settings.FacilityType.ContainsKey(facility.defName))
             {
                 facilityComp.mustBePlacedAdjacent =
-                    LinkableSettingsMod.instance.Settings.FacilityType[facility.defName] == 1;
+                    LinkableSettingsMod.Instance.Settings.FacilityType[facility.defName] == 1;
                 facilityComp.mustBePlacedAdjacentCardinalToBedHead =
-                    LinkableSettingsMod.instance.Settings.FacilityType[facility.defName] == 2;
+                    LinkableSettingsMod.Instance.Settings.FacilityType[facility.defName] == 2;
                 facilityComp.mustBePlacedAdjacentCardinalToAndFacingBedHead =
-                    LinkableSettingsMod.instance.Settings.FacilityType[facility.defName] == 3;
+                    LinkableSettingsMod.Instance.Settings.FacilityType[facility.defName] == 3;
             }
             else
             {
@@ -79,12 +66,12 @@ public static class Main
             }
 
             facilityComp.maxDistance =
-                LinkableSettingsMod.instance.Settings.FacilityRange.TryGetValue(facility.defName, out var distance)
+                LinkableSettingsMod.Instance.Settings.FacilityRange.TryGetValue(facility.defName, out var distance)
                     ? distance
                     : VanillaFacilityRange[facility.defName];
 
             facilityComp.maxSimultaneous =
-                LinkableSettingsMod.instance.Settings.FacilityAmount.TryGetValue(facility.defName, out var amount)
+                LinkableSettingsMod.Instance.Settings.FacilityAmount.TryGetValue(facility.defName, out var amount)
                     ? amount > 25 ? int.MaxValue : amount
                     : VanillaFacilityAmount[facility.defName];
         }
@@ -92,19 +79,19 @@ public static class Main
 
     public static bool HaveAnySavedSettings()
     {
-        return LinkableSettingsMod.instance.Settings.FacilityType.Any() ||
-               LinkableSettingsMod.instance.Settings.FacilityRange.Any() ||
-               LinkableSettingsMod.instance.Settings.FacilityAmount.Any();
+        return LinkableSettingsMod.Instance.Settings.FacilityType.Any() ||
+               LinkableSettingsMod.Instance.Settings.FacilityRange.Any() ||
+               LinkableSettingsMod.Instance.Settings.FacilityAmount.Any();
     }
 
     public static bool HaveAnySavedSettings(string defName)
     {
-        return LinkableSettingsMod.instance.Settings.FacilityType.ContainsKey(defName) ||
-               LinkableSettingsMod.instance.Settings.FacilityRange.ContainsKey(defName) ||
-               LinkableSettingsMod.instance.Settings.FacilityAmount.ContainsKey(defName);
+        return LinkableSettingsMod.Instance.Settings.FacilityType.ContainsKey(defName) ||
+               LinkableSettingsMod.Instance.Settings.FacilityRange.ContainsKey(defName) ||
+               LinkableSettingsMod.Instance.Settings.FacilityAmount.ContainsKey(defName);
     }
 
-    public static void SaveVanilla()
+    private static void saveVanilla()
     {
         foreach (var facility in AllFacilities)
         {
@@ -156,9 +143,9 @@ public static class Main
         facilityComp.mustBePlacedAdjacentCardinalToAndFacingBedHead = VanillaFacilityType[facility.defName] == 3;
         facilityComp.maxDistance = VanillaFacilityRange[facility.defName];
         facilityComp.maxSimultaneous = VanillaFacilityAmount[facility.defName];
-        LinkableSettingsMod.instance.Settings.FacilityRange.Remove(facility.defName);
-        LinkableSettingsMod.instance.Settings.FacilityType.Remove(facility.defName);
-        LinkableSettingsMod.instance.Settings.FacilityAmount.Remove(facility.defName);
+        LinkableSettingsMod.Instance.Settings.FacilityRange.Remove(facility.defName);
+        LinkableSettingsMod.Instance.Settings.FacilityType.Remove(facility.defName);
+        LinkableSettingsMod.Instance.Settings.FacilityAmount.Remove(facility.defName);
     }
 
     public static void ResetToVanilla()
@@ -183,24 +170,8 @@ public static class Main
             facilityComp.maxSimultaneous = VanillaFacilityAmount[facility.defName];
         }
 
-        LinkableSettingsMod.instance.Settings.FacilityRange = new Dictionary<string, float>();
-        LinkableSettingsMod.instance.Settings.FacilityType = new Dictionary<string, int>();
-        LinkableSettingsMod.instance.Settings.FacilityAmount = new Dictionary<string, int>();
-    }
-
-    public static void LogMessage(string message, bool forced = false, bool warning = false)
-    {
-        if (warning)
-        {
-            Log.Warning($"[LinkableSettings]: {message}");
-            return;
-        }
-
-        if (!forced && !LinkableSettingsMod.instance.Settings.VerboseLogging)
-        {
-            return;
-        }
-
-        Log.Message($"[LinkableSettings]: {message}");
+        LinkableSettingsMod.Instance.Settings.FacilityRange = new Dictionary<string, float>();
+        LinkableSettingsMod.Instance.Settings.FacilityType = new Dictionary<string, int>();
+        LinkableSettingsMod.Instance.Settings.FacilityAmount = new Dictionary<string, int>();
     }
 }

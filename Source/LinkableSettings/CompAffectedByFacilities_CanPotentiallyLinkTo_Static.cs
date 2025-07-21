@@ -12,7 +12,7 @@ public static class CompAffectedByFacilities_CanPotentiallyLinkTo_Static
     public static bool Prefix(ThingDef facilityDef, IntVec3 facilityPos, Rot4 facilityRot, ThingDef myDef,
         IntVec3 myPos, Rot4 myRot, ref bool __result)
     {
-        if (!LinkableSettingsMod.instance.Settings.FacilityType.TryGetValue(facilityDef.defName, out var linkType) ||
+        if (!LinkableSettingsMod.Instance.Settings.FacilityType.TryGetValue(facilityDef.defName, out var linkType) ||
             linkType < 4)
         {
             return true;

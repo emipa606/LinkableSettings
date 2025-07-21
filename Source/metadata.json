@@ -2,11 +2,18 @@
   "Continued": false,
   "CanAdd": "0",
   "CanRemove": "0",
-  "PreviewVersion": "1.5",
+  "PreviewVersion": "1.6",
   "SocialImageSet": true,
   "FundingSet": true,
   "SearchTags": [
     " range",
     " connection"
-  ]
+  ],
+  "Patches": false,
+  "Defs": true,
+  "Assemblies": true,
+  "LinesOfCode": 31385,
+  "LinesOfXML": 761,
+  "CodeBaseSize": 72,
+  "LastXmlCleaning": "2025-07-21T20:40:11.5233144+02:00"
 }

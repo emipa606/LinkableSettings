@@ -8,26 +8,23 @@ namespace LinkableSettings;
 /// </summary>
 internal class LinkableSettingsModSettings : ModSettings
 {
-    public Dictionary<string, int> FacilityAmount =
-        new Dictionary<string, int>();
+    public Dictionary<string, int> FacilityAmount = new();
 
-    private List<string> FacilityAmountKeys;
+    private List<string> facilityAmountKeys;
 
-    private List<int> FacilityAmountValues;
+    private List<int> facilityAmountValues;
 
-    public Dictionary<string, float> FacilityRange =
-        new Dictionary<string, float>();
+    public Dictionary<string, float> FacilityRange = new();
 
-    private List<string> FacilityRangeKeys;
+    private List<string> facilityRangeKeys;
 
-    private List<float> FacilityRangeValues;
+    private List<float> facilityRangeValues;
 
-    public Dictionary<string, int> FacilityType =
-        new Dictionary<string, int>();
+    public Dictionary<string, int> FacilityType = new();
 
-    private List<string> FacilityTypeKeys;
+    private List<string> facilityTypeKeys;
 
-    private List<int> FacilityTypeValues;
+    private List<int> facilityTypeValues;
     public bool VerboseLogging;
 
     public override void ExposeData()
@@ -36,12 +33,12 @@ internal class LinkableSettingsModSettings : ModSettings
         Scribe_Values.Look(ref VerboseLogging, "VerboseLogging");
         Scribe_Collections.Look(ref FacilityType, "FacilityType", LookMode.Value,
             LookMode.Value,
-            ref FacilityTypeKeys, ref FacilityTypeValues);
+            ref facilityTypeKeys, ref facilityTypeValues);
         Scribe_Collections.Look(ref FacilityAmount, "FacilityAmount", LookMode.Value,
             LookMode.Value,
-            ref FacilityAmountKeys, ref FacilityAmountValues);
+            ref facilityAmountKeys, ref facilityAmountValues);
         Scribe_Collections.Look(ref FacilityRange, "FacilityRange", LookMode.Value,
             LookMode.Value,
-            ref FacilityRangeKeys, ref FacilityRangeValues);
+            ref facilityRangeKeys, ref facilityRangeValues);
     }
 }

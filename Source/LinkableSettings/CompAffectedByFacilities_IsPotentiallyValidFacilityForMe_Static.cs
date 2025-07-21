@@ -11,7 +11,7 @@ public static class CompAffectedByFacilities_IsPotentiallyValidFacilityForMe_Sta
 {
     public static bool Prefix(ThingDef facilityDef, IntVec3 facilityPos, IntVec3 myPos, Map map, ref bool __result)
     {
-        if (!LinkableSettingsMod.instance.Settings.FacilityType.TryGetValue(facilityDef.defName, out var linkType) ||
+        if (!LinkableSettingsMod.Instance.Settings.FacilityType.TryGetValue(facilityDef.defName, out var linkType) ||
             linkType < 4)
         {
             return true;
