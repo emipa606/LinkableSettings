@@ -30,15 +30,32 @@ public static class CompAffectedByFacilities_CanPotentiallyLinkTo_Static
 
         __result = Vector3.Distance(myCenter, facilityCenter) <= compProperties.maxDistance;
 
-        if (linkType != 4 || !__result)
+        if (linkType != 4 && !__result)
         {
             return false;
         }
 
         try
         {
-            __result = currentMap.regionAndRoomUpdater.Enabled &&
-                       facilityPos.GetRoom(currentMap) == myPos.GetRoom(currentMap);
+            if (!currentMap.regionAndRoomUpdater.Enabled)
+            {
+                // If the region and room updater is not enabled, we use range
+                return false;
+            }
+
+            var myRoom = myPos.GetRoom(currentMap);
+            if (myRoom == null)
+            {
+                // If my position is not in a room, we use range
+                return false;
+            }
+
+            if (myRoom.PsychologicallyOutdoors)
+            {
+                return false; // If my position is outdoors, we use range
+            }
+
+            __result = facilityPos.GetRoom(currentMap) == myPos.GetRoom(currentMap);
         }
         catch
         {
