@@ -30,7 +30,7 @@ public static class CompAffectedByFacilities_CanPotentiallyLinkTo_Static
 
         __result = Vector3.Distance(myCenter, facilityCenter) <= compProperties.maxDistance;
 
-        if (linkType != 4 && !__result)
+        if (linkType != 4)
         {
             return false;
         }

@@ -1,5 +1,8 @@
 # Changelog for LinkableSettings
 
+1.6.2 - Fixed through walls setting
+
+
 1.6.1 - Room setting should work as expected now
 
 
