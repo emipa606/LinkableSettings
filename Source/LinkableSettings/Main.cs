@@ -26,8 +26,9 @@ public static class Main
         var harmony = new Harmony("Mlie.LinkableSettings");
         harmony.PatchAll(Assembly.GetExecutingAssembly());
         AllFacilities = DefDatabase<ThingDef>.AllDefsListForReading
-            .Where(def => def.HasComp<CompFacility>() || def.HasComp<CompFacilityInactiveWhenElectricityDisabled>() ||
-                          def.HasComp<CompFacilityQualityBased>()).ToList();
+            .Where(def => (def.HasComp<CompFacility>() || def.HasComp<CompFacilityInactiveWhenElectricityDisabled>() ||
+                           def.HasComp<CompFacilityQualityBased>()) &&
+                          !def.comps.Any(properties => properties is CompProperties_GravshipFacility)).ToList();
         LinkableSettingsMod.Instance.Settings.FacilityType ??= new Dictionary<string, int>();
 
         LinkableSettingsMod.Instance.Settings.FacilityRange ??= new Dictionary<string, float>();

@@ -1,5 +1,8 @@
 # Changelog for LinkableSettings
 
+1.6.3 - Ignores gravships facilities as they do not use the standard facility code
+
+
 1.6.2 - Fixed through walls setting
 
 
