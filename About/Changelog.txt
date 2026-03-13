@@ -1,5 +1,8 @@
 # Changelog for LinkableSettings
 
+1.6.4 - Allow decimal values for range
+
+
 1.6.3 - Ignores gravships facilities as they do not use the standard facility code
 
 

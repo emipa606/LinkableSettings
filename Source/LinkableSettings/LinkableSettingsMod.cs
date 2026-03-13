@@ -298,10 +298,11 @@ internal class LinkableSettingsMod : Mod
                         : Main.VanillaFacilityRange[currentDef.defName];
 
                     var currentRange = linkRange;
-                    listingStandard.Label("LiSe.linkrange.label".Translate(linkRange), -1f,
+                    listingStandard.Label(
+                        "LiSe.linkrange.label".Translate(linkRange.ToStringByStyle(ToStringStyle.FloatMaxOne)), -1f,
                         "LiSe.linkrange.description".Translate());
 
-                    linkRange = (float)Math.Round(listingStandard.Slider(linkRange, 1f, 100f));
+                    linkRange = listingStandard.Slider(linkRange, 1f, 100f);
 
                     if (linkRange != currentRange)
                     {
