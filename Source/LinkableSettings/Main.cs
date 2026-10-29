@@ -71,10 +71,16 @@ public static class Main
                     ? distance
                     : VanillaFacilityRange[facility.defName];
 
-            facilityComp.maxSimultaneous =
-                LinkableSettingsMod.Instance.Settings.FacilityAmount.TryGetValue(facility.defName, out var amount)
-                    ? amount > 25 ? int.MaxValue : amount
-                    : VanillaFacilityAmount[facility.defName];
+            if (LinkableSettingsMod.Instance.Settings.FacilityAmount.TryGetValue(facility.defName, out var amount))
+            {
+                facilityComp.maxSimultaneous =
+                    amount > 25 ? int.MaxValue : amount;
+            }
+            else
+            {
+                facilityComp.maxSimultaneous =
+                    VanillaFacilityAmount[facility.defName];
+            }
         }
     }
 
@@ -134,19 +140,19 @@ public static class Main
             return;
         }
 
-        if (!VanillaFacilityType.TryGetValue(facility.defName, out var value))
+        if (!VanillaFacilityType.TryGetValue(facility?.defName, out var value))
         {
             return;
         }
 
         facilityComp.mustBePlacedAdjacent = value == 1;
-        facilityComp.mustBePlacedAdjacentCardinalToBedHead = VanillaFacilityType[facility.defName] == 2;
-        facilityComp.mustBePlacedAdjacentCardinalToAndFacingBedHead = VanillaFacilityType[facility.defName] == 3;
-        facilityComp.maxDistance = VanillaFacilityRange[facility.defName];
-        facilityComp.maxSimultaneous = VanillaFacilityAmount[facility.defName];
-        LinkableSettingsMod.Instance.Settings.FacilityRange.Remove(facility.defName);
-        LinkableSettingsMod.Instance.Settings.FacilityType.Remove(facility.defName);
-        LinkableSettingsMod.Instance.Settings.FacilityAmount.Remove(facility.defName);
+        facilityComp.mustBePlacedAdjacentCardinalToBedHead = VanillaFacilityType[facility?.defName] == 2;
+        facilityComp.mustBePlacedAdjacentCardinalToAndFacingBedHead = VanillaFacilityType[facility?.defName] == 3;
+        facilityComp.maxDistance = VanillaFacilityRange[facility?.defName];
+        facilityComp.maxSimultaneous = VanillaFacilityAmount[facility?.defName];
+        LinkableSettingsMod.Instance.Settings.FacilityRange.Remove(facility?.defName);
+        LinkableSettingsMod.Instance.Settings.FacilityType.Remove(facility?.defName);
+        LinkableSettingsMod.Instance.Settings.FacilityAmount.Remove(facility?.defName);
     }
 
     public static void ResetToVanilla()

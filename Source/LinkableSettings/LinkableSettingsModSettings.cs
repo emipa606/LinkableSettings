@@ -10,22 +10,22 @@ internal class LinkableSettingsModSettings : ModSettings
 {
     public Dictionary<string, int> FacilityAmount = new();
 
+    public Dictionary<string, float> FacilityRange = new();
+
+    public Dictionary<string, int> FacilityType = new();
+    public bool VerboseLogging;
+
     private List<string> facilityAmountKeys;
 
     private List<int> facilityAmountValues;
-
-    public Dictionary<string, float> FacilityRange = new();
 
     private List<string> facilityRangeKeys;
 
     private List<float> facilityRangeValues;
 
-    public Dictionary<string, int> FacilityType = new();
-
     private List<string> facilityTypeKeys;
 
     private List<int> facilityTypeValues;
-    public bool VerboseLogging;
 
     public override void ExposeData()
     {

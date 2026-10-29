@@ -59,12 +59,12 @@ internal class LinkableSettingsMod : Mod
     /// <summary>
     ///     The settings-window
     /// </summary>
-    /// <param name="rect"></param>
-    public override void DoSettingsWindowContents(Rect rect)
+    /// <param name="inRect"></param>
+    public override void DoSettingsWindowContents(Rect inRect)
     {
-        base.DoSettingsWindowContents(rect);
+        base.DoSettingsWindowContents(inRect);
 
-        var rect2 = rect.ContractedBy(1);
+        var rect2 = inRect.ContractedBy(1);
         leftSideWidth = rect2.ContractedBy(10).width / 5 * 2;
 
         listingStandard = new Listing_Standard();
@@ -366,7 +366,7 @@ internal class LinkableSettingsMod : Mod
         listingStandard.End();
     }
 
-    private void drawTabsList(Rect rect)
+    private static void drawTabsList(Rect rect)
     {
         var scrollContainer = rect.ContractedBy(10);
         scrollContainer.width = leftSideWidth;
